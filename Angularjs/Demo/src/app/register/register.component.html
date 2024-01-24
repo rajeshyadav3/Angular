@@ -1,0 +1,54 @@
+<h1 align="center">Registration Page</h1>
+
+<table align="center">
+    <tr>
+        <td>EmpName</td>
+        <td><input type="text" name="empName" [(ngModel)]="empName" /></td>
+    </tr>
+    <tr>
+        <td>Salary</td>
+        <td><input type="text" name="salary" [(ngModel)]="salary" /></td>
+    </tr>
+    <tr>
+        <td>Gender</td>
+        <td>
+            <select name="gender" [(ngModel)]="gender" >
+                <option value="" selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>DateOfJoin</td>
+        <td><input type="date" name="doj" [(ngModel)]="doj" /></td>
+    </tr>
+    
+    <tr>
+        <td>Country</td>
+        <td>
+            <select name="country" [(ngModel)]="country" >
+                <option value="" selected>Select Country</option>
+                <option value="IND">INDIA</option>
+                <option value="USA">USA</option>
+                <option value="CAN">Canada</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>EmailId</td>
+        <td><input type="text" name="emailId" [(ngModel)]="emailId" /></td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td><input type="password" name="password" [(ngModel)]="password" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button (click)="submit()">Register</button>
+        </td>
+    </tr>
+</table>
