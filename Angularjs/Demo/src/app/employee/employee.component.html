@@ -1,0 +1,33 @@
+<h3>Welcome {{emailId}}!</h3>
+<h1 align="center">Employees Data</h1>
+<br/>
+<div align="center" class="container">
+    <table class="table table-hover table-striped table-sm table-bordered">
+        <thead>
+            <tr align="center">
+                <th class="bg-info text-white">EmpId</th>
+                <th class="bg-info text-white">EmpName</th>
+                <th class="bg-info text-white">Salary</th>
+                <th class="bg-info text-white">Gender</th>
+                <th class="bg-info text-white">DateOfJoin</th>
+                <th class="bg-info text-white">Country</th>
+                <th class="bg-info text-white">Email-Id</th>
+                <th class="bg-info text-white">Experience</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of employees" align="center">
+                <td>{{emp.empId}}</td>
+                <td>{{emp.empName | gender: emp.gender | uppercase }} </td>
+                <td>{{emp.salary | currency:"INR"}}</td>
+                <td>{{emp.gender| lowercase }} </td>
+                <td>{{emp.doj | date:'dd-MMM-yyyy' }}</td>
+                <td>{{emp.country}}</td>
+                <td>{{emp.emailId}}</td>
+                <td>{{emp.doj | exp }}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,92 @@
+<h1 align="center">ShowEmployeeById</h1>
+
+<div align="center">
+    Enter Employee ID: <input type="text" name="empId" [(ngModel)]="empId" /> <br/>
+    <button (click)="getEmployee()">Get Employee</button>
+</div><br/>
+
+
+<div *ngIf="emp">
+    <table align="center" border="2">
+        <thead>
+            <tr>
+                <th>EmpId</th>
+                <th>EmpName</th>
+                <th>Salary</th>
+                <th>Gender</th>
+                <th>Country</th>
+                <th>DOJ</th>
+                <th>EmailId</th>
+            </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <td>{{emp.empId}}</td>
+                <td>{{emp.empName}}</td>
+                <td>{{emp.salary}}</td>
+                <td>{{emp.gender}}</td>
+                <td>{{emp.country}}</td>
+                <td>{{emp.doj}}</td>
+                <td>{{emp.emailId}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>
+<div *ngIf="!emp">
+   <h4 align="center"> Employee with ID {{ empId }} not found.</h4>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

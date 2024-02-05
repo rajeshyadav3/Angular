@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EmpService } from '../emp.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,28 +10,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   
-  empName: any;
-  salary: any;
-  gender: any;
-  doj: any;
-  country: any;
-  emailId: any;
-  password: any;
-  
-  constructor() {
+  countries: any;
+  departments: any;
+  emp:any;
+
+  constructor(private service: EmpService,private toastr: ToastrService,private router: Router) {
+
+    this.emp = {
+      empName:'',
+      salary:'',
+      gender:'',
+      doj:'',
+      country:'',
+      emailId:'',
+      mobileNo:'',
+      password:'',
+      department: {
+        deptId:''
+      }
+    };
   }
 
   ngOnInit() {
+    this.service.getAllCountries().subscribe((data: any) => {
+      this.countries = data;
+      console.log(data);
+    });
+    this.service.getAllDepartments().subscribe((data: any) => {this.departments = data;});
   }
+ 
 
-  submit() {
-    console.log("EmpName: " + this.empName);
-    console.log("Salary: " + this.salary);
-    console.log("Gender: " + this.gender);
-    console.log("DateOfJoin: " + this.doj);
-    console.log("Country: " + this.country);
-    console.log("Email-Id: " + this.emailId);
-    console.log("Password: " + this.password);
-  }
+  registerSubmit(regForm: any) {
+    console.log(regForm);
+
+    this.emp.empName = regForm.value.empName;
+    this.emp.salary = regForm.value.salary;
+    this.emp.gender = regForm.value.gender;
+    this.emp.doj = regForm.value.doj;
+    this.emp.country = regForm.value.country;
+    this.emp.emailId = regForm.value.emailId;
+    this.emp.mobileNo = regForm.value.mobileNo;
+    this.emp.password = regForm.value.password;
+    this.emp.department.deptId = regForm.value.department;
+
+    console.log(this.emp);
+
+    this.service.regsiterEmployee(this.emp).subscribe((data: any) => {
+        console.log(data);
+        this.router.navigate(['login']);
+        this.toastr.success('Registration Successful!', 'Success');
+    });
+}
+
 
 }
