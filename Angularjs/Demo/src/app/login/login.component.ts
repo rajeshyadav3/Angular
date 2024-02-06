@@ -1,48 +1,47 @@
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
-
-//Import Router class
 import { Router } from '@angular/router';
-
-//Import EmpService
 import { EmpService } from '../emp.service';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'] 
 })
 export class LoginComponent implements OnInit {
-
-  
+   protected aFormGroup!: FormGroup; // Declare aFormGroup as FormGroup
   emp: any;
+  siteKey: string = '6Lc8iWgpAAAAAHcBjB7vGcmv_dl-YU8JJs0-BynY'; // Declare siteKey as a property
 
-  constructor(private router: Router,private toastr:ToastrService,private service: EmpService) {
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private service: EmpService,
+    private formBuilder: FormBuilder
+  ) {}
 
+  ngOnInit() {
+    // Initialize aFormGroup in ngOnInit
+    this.aFormGroup = this.formBuilder.group({
+      recaptcha: ['', Validators.required]
+    });
   }
 
-  ngOnInit(){
-  }
-
-  
-
- async loginSubmit(loginForm: any) {
+  async loginSubmit(loginForm: any) {
     console.log(loginForm);
     console.log("EmailId : " + loginForm.emailId);
     console.log("Password: " + loginForm.password);
 
     if (loginForm.emailId == 'HR' && loginForm.password == 'HR') {
-      
-      //Setting the isUserLoggedIn variable value to true under EmpService
+      // Setting the isUserLoggedIn variable value to true under EmpService
       this.service.setIsUserLoggedIn();
 
-      //Storing EmailId under LocalStorage
+      // Storing EmailId under LocalStorage
       localStorage.setItem("emailId", loginForm.emailId);
-      this.toastr.success("Login sucess");
+      this.toastr.success("Login success");
       this.router.navigate(['showemps']);
     } else {
-
       this.emp = null;
 
       await this.service.employeeLogin(loginForm.emailId, loginForm.password).then((data: any) => {
@@ -51,20 +50,16 @@ export class LoginComponent implements OnInit {
       });
 
       if (this.emp != null) {
-
-        //Setting the isUserLoggedIn variable value to true under EmpService
+        // Setting the isUserLoggedIn variable value to true under EmpService
         this.service.setIsUserLoggedIn();
         
-        //Storing EmailId under LocalStorage
+        // Storing EmailId under LocalStorage
         localStorage.setItem("emailId", loginForm.emailId);
-        this.toastr.success("Login sucess");
+        this.toastr.success("Login success");
         this.router.navigate(['products']);
       } else {
-       this.toastr.error("Invalid Credentials")
+        this.toastr.error("Invalid Credentials");
       }
-
     }
-
   }
-
 }

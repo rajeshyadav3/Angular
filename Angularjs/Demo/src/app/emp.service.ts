@@ -42,6 +42,14 @@ export class EmpService {
     return this.http.get('http://localhost:8080/empLogin/' + emailId + '/' + password).toPromise();
   }
 
+  deleteEmployee(empId: any): any {
+    return this.http.delete('http://localhost:8080/deleteEmployeeById/' + empId);
+  }
+
+  updateEmployee(emp: any): any {
+    return this.http.put('http://localhost:8080/updateEmployee', emp);
+  }
+
   //Cart using Service
   addToCart(product: any) {
     this.cartItems.push(product);

@@ -121,7 +121,7 @@
                     <label for="department">Department:</label>
                     <select name="department" class="form-control" ngModel required>
                         <option value="" selected>Select Department</option>
-                        <option *ngFor="let dept of departments" [ngValue]="dept">{{ dept.name }}</option>
+                        <option value="{{department.deptId}}" *ngFor="let department of departments">{{department.deptName}}</option>
                     </select>
                 </div>
             </td>
